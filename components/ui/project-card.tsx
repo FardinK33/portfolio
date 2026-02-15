@@ -83,7 +83,7 @@ export function ProjectCard({
                         !isEven ? "justify-end" : "justify-start"
                     )}>
                         {tags.map((tag) => (
-                            <Badge key={tag} variant="outline" className="rounded-full px-4 py-1 uppercase text-[10px] tracking-wider border-border/50 bg-background/50 backdrop-blur-sm">
+                            <Badge key={tag} variant="outline" className="rounded-full px-4 py-1 uppercase text-[10px] tracking-wider border-border bg-background/50 backdrop-blur-sm">
                                 {tag}
                             </Badge>
                         ))}

@@ -11,7 +11,7 @@ import { ContactSection } from "@/components/sections/ContactSection";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-foreground selection:text-background w-[90%] mx-auto">
+    <main className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-foreground selection:text-background">
       <Cursor />
       <Navbar />
       <HeroSection />

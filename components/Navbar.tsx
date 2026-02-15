@@ -44,13 +44,13 @@ export function Navbar() {
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.8, ease: "circOut" }}
-                className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-background/50 border-b border-border/50"
+                className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-background/50 border-b border-border"
             >
                 {/* 
                    Constrain content to the same width as the main app 
-                   Use w-[85%] mx-auto to match the user's manual change in page.tsx
+                   Use container mx-auto to match other sections
                 */}
-                <div className="w-[90%] mx-auto h-20 flex items-center justify-between px-4 md:px-6 border-x border-border/50">
+                <div className="w-[90%] mx-auto h-20 flex items-center justify-between px-4 md:px-6 border-x border-border">
 
                     {/* Logo */}
                     <a
@@ -62,7 +62,7 @@ export function Navbar() {
                     </a>
 
                     {/* Desktop Menu */}
-                    <div className="hidden md:flex items-center gap-8 border-l pl-4 border-border/50 h-full">
+                    <div className="hidden md:flex items-center gap-8 border-l pl-4 border-border h-full">
                         {navLinks.map((link) => (
                             <a
                                 key={link.name}
@@ -75,11 +75,13 @@ export function Navbar() {
                             </a>
                         ))}
 
+                        <div className="h-full w-px border border-border"></div>
+
                         {/* Theme Toggle (Desktop) */}
                         {mounted && (
                             <button
                                 onClick={toggleTheme}
-                                className="p-2 ml-4 rounded-full hover:bg-muted transition-colors text-foreground"
+                                className={`p-2 rounded-full hover:bg-muted transition-all text-foreground ${theme === "dark" ? "border-r border-t" : "border-l border-b"}`}
                                 aria-label="Toggle theme"
                             >
                                 {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}

@@ -24,24 +24,35 @@ const projects = [
 
 export function WorksSection() {
     return (
-        <section id="works" className="py-24 container px-4 md:px-6">
-            <div className="border-b border-border/50 pb-12 mb-12">
-                <SectionHeading
-                    title="Works,"
-                    subtitle="Selected Projects"
-                    rightElement={<ArrowUpRight className="w-10 h-10 text-muted-foreground" />}
-                    className="mb-0"
-                />
+        <section id="works">
+            {/* Heading Strip - Full Width Border-Y, Inner 90% Border-X */}
+            <div className="w-full border-y border-border bg-background/50 backdrop-blur-sm">
+                <div className="w-[90%] mx-auto border-x border-border py-12 px-4 md:px-6">
+                    <SectionHeading
+                        title="Works,"
+                        subtitle="Selected Projects"
+                        rightElement={<ArrowUpRight className="w-10 h-10 text-muted-foreground" />}
+                        className="mb-0"
+                    />
+                </div>
             </div>
 
-            <div className="flex flex-col gap-24 md:gap-32">
-                {projects.map((project, index) => (
-                    <ProjectCard
-                        key={project.title}
-                        index={index}
-                        {...project}
-                    />
-                ))}
+            {/* Content Strip - Continuous Vertical Rails */}
+            <div className="w-full">
+                <div className="w-[90%] mx-auto border-x border-border pb-24 px-4 md:px-6 pt-12">
+                    <div className="flex flex-col gap-24 md:gap-32">
+                        {projects.map((project, index) => (
+                            <>
+                                <ProjectCard
+                                    key={project.title}
+                                    index={index}
+                                    {...project}
+                                />
+                                {index !== projects.length - 1 && <div key={index} className="border-b border-border"></div>}
+                            </>
+                        ))}
+                    </div>
+                </div>
             </div>
         </section>
     );
