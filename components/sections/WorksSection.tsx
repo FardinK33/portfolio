@@ -42,14 +42,14 @@ export function WorksSection() {
                 <div className="w-[90%] mx-auto border-x border-border pb-24 px-4 md:px-6 pt-12">
                     <div className="flex flex-col gap-24 md:gap-32">
                         {projects.map((project, index) => (
-                            <>
+                            <div key={index}>
                                 <ProjectCard
                                     key={project.title}
                                     index={index}
                                     {...project}
                                 />
-                                {index !== projects.length - 1 && <div key={index} className="border-b border-border"></div>}
-                            </>
+                                {index !== projects.length - 1 && <div className="border-b border-border"></div>}
+                            </div>
                         ))}
                     </div>
                 </div>

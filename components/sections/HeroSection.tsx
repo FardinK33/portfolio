@@ -17,7 +17,7 @@ export function HeroSection() {
             ref={containerRef}
             className="relative h-screen flex flex-col justify-end pt-20 pb-20"
         >
-            <div className="w-[90%] px-4 md:px-6 mx-auto border-x border-border relative h-full">
+            <div className="w-[90%] px-4 md:px-6 mx-auto border-x border-border relative h-full flex flex-col justify-end">
 
                 {/* Background Layer (Parallax Text) - Contained */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
@@ -84,7 +84,7 @@ export function HeroSection() {
                 transition={{ delay: 1, duration: 1 }}
                 className="absolute bottom-4 left-0 w-full border-y border-border py-3 bg-background/50 backdrop-blur-sm overflow-hidden"
             >
-                <div className="container px-4 flex items-center text-xs md:text-sm font-bold uppercase tracking-widest text-muted-foreground/80 h-full overflow-hidden mask-linear-gradient">
+                <div className="px-4 flex items-center text-xs md:text-sm font-bold uppercase tracking-widest text-muted-foreground/80 h-full overflow-hidden mask-linear-gradient">
                     <div className="flex w-full overflow-hidden">
                         <motion.div
                             className="flex whitespace-nowrap"
