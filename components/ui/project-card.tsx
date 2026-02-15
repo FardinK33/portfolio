@@ -9,6 +9,8 @@ interface ProjectCardProps {
     category: string;
     image: string;
     tags: string[];
+    description?: string;
+    hoverText?: string;
     className?: string;
     index?: number;
 }
@@ -18,44 +20,74 @@ export function ProjectCard({
     category,
     image,
     tags,
+    description,
+    hoverText,
     className,
     index = 0,
 }: ProjectCardProps) {
+    const isEven = index % 2 === 0;
+
     return (
         <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className={cn("group relative", className)}
         >
-            <div className={cn("group cursor-pointer space-y-4", className)}>
-                {/* Header */}
-                <div className="flex justify-between items-baseline mb-2">
-                    <span className="text-xs text-muted-foreground uppercase tracking-widest">0{index + 1} / {category}</span>
-                </div>
-
-                <h3 className="text-2xl md:text-3xl font-bold uppercase tracking-tight group-hover:text-muted-foreground transition-colors duration-300">
-                    {title}
-                </h3>
-
-                {/* Image Container with Glow Effect */}
-                <div className="relative overflow-hidden rounded-lg bg-muted aspect-[4/3]">
-                    <div className="absolute inset-0 bg-accent/0 group-hover:bg-accent/10 transition-colors duration-500 z-10" />
+            <div className={cn(
+                "grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center",
+                !isEven ? "md:direction-rtl" : ""
+            )}>
+                {/* Image Section */}
+                <div className={cn(
+                    "relative overflow-hidden rounded-xl bg-muted aspect-[16/10] group/image cursor-pointer shadow-lg transition-all duration-500 hover:shadow-2xl",
+                    !isEven ? "md:order-2" : "md:order-1"
+                )}>
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/image:opacity-100 transition-opacity duration-500 z-20 flex items-center justify-center p-6 text-center backdrop-blur-[2px]">
+                        <p className="text-white font-bold text-lg md:text-2xl tracking-wide transform translate-y-4 group-hover/image:translate-y-0 transition-transform duration-500">
+                            {hoverText || "View Project"}
+                        </p>
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60 z-10" />
                     <Image
                         src={image}
                         alt={title}
                         fill
-                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        className="object-cover transition-transform duration-700 ease-out group-hover/image:scale-105"
                     />
                 </div>
 
-                {/* Footer / Tags */}
-                <div className="flex gap-2 flex-wrap pt-2">
-                    {tags.map((tag) => (
-                        <Badge key={tag} variant="secondary" className="rounded-md uppercase text-[10px] tracking-wider font-normal">
-                            {tag}
-                        </Badge>
-                    ))}
+                {/* Content Section */}
+                <div className={cn(
+                    "flex flex-col justify-center space-y-6",
+                    !isEven ? "md:order-1 md:text-right md:items-end" : "md:order-2 md:text-left md:items-start"
+                )}>
+                    <div className="space-y-2">
+                        <div className="flex items-center gap-4 text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2">
+                            <span>0{index + 1}</span>
+                            <span className="w-12 h-[1px] bg-border"></span>
+                            <span>{category}</span>
+                        </div>
+                        <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-tight text-foreground group-hover:text-muted-foreground transition-colors duration-300">
+                            {title}
+                        </h3>
+                    </div>
+
+                    <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-md">
+                        {description}
+                    </p>
+
+                    <div className={cn(
+                        "flex gap-2 flex-wrap",
+                        !isEven ? "justify-end" : "justify-start"
+                    )}>
+                        {tags.map((tag) => (
+                            <Badge key={tag} variant="outline" className="rounded-full px-4 py-1 uppercase text-[10px] tracking-wider border-border/50 bg-background/50 backdrop-blur-sm">
+                                {tag}
+                            </Badge>
+                        ))}
+                    </div>
                 </div>
             </div>
         </motion.div>

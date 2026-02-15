@@ -4,30 +4,31 @@ import { ArrowUpRight } from "lucide-react";
 
 export function ContactSection() {
     return (
-        <section className="py-32 container px-4 md:px-6 relative overflow-hidden">
+        <section id="contact" className="py-32 container px-4 md:px-6 relative overflow-hidden">
             <div className="flex flex-col md:flex-row justify-between items-end gap-12">
+
                 <div className="space-y-4">
                     <h4 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-4">
-                        Got a project?
+                        Have an idea? Building something ambitious?
                     </h4>
                     <motion.h2
                         initial={{ y: 100, opacity: 0 }}
                         whileInView={{ y: 0, opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="text-7xl md:text-9xl font-bold uppercase leading-none tracking-tighter"
+                        className="text-6xl md:text-8xl font-bold uppercase leading-none tracking-tighter"
                     >
                         LET'S <br />
-                        TALK.
+                        ENGINEER IT.
                     </motion.h2>
                 </div>
 
                 <div className="flex flex-col items-end gap-6">
                     <a
-                        href="mailto:hello@developer.com"
+                        href="mailto:fardink3103@gmail.com"
                         className="text-xl md:text-2xl font-bold hover:text-muted-foreground transition-colors flex items-center gap-2 group"
                     >
-                        hello@developer.com
+                        fardink3103@gmail.com
                         <ArrowUpRight className="w-6 h-6 group-hover:rotate-45 transition-transform duration-300" />
                     </a>
 
@@ -41,7 +42,7 @@ export function ContactSection() {
 
             {/* Footer Strip */}
             <div className="absolute bottom-0 left-0 w-full border-t border-border/20 py-6 text-center text-xs text-muted-foreground uppercase tracking-widest">
-                © 2026 Fardin Khan Portfolio
+                © 2026 Fardin Khan. Built with Next.js & Tailwind.
             </div>
         </section>
     );

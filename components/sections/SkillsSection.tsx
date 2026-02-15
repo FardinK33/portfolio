@@ -1,38 +1,39 @@
 import { motion } from "motion/react";
 
 const skills = [
-    "React",
-    "Node.js",
-    "TypeScript",
-    "Next.js",
-    "WebGL",
-    "Three.js",
-    "Tailwind",
-    "Figma",
+    { category: "Frontend", items: ["React", "JavaScript", "Zustand", "TailwindCSS"] },
+    { category: "Backend", items: ["Node.js", "Express.js", "FastAPI"] },
+    { category: "Languages", items: ["Python", "C++", "Java", "SQL"] },
+    { category: "Database", items: ["MongoDB", "Relational Systems"] },
 ];
 
 export function SkillsSection() {
     return (
-        <section className="py-24 border-y border-border/50">
-            <div className="container px-0">
-                <div className="grid grid-cols-2 md:grid-cols-4">
-                    {skills.map((skill, index) => (
-                        <motion.div
-                            key={skill}
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.05 }}
-                            className="group aspect-square md:aspect-[4/3] border border-border/50 flex items-center justify-center relative overflow-hidden bg-background hover:bg-muted/30 transition-colors duration-500"
-                        >
-                            <h3 className="tex-xl md:text-2xl font-bold uppercase tracking-widest z-10 group-hover:scale-110 transition-transform duration-300">
-                                {skill}
-                            </h3>
-                            <div className="absolute inset-0 bg-gradient-to-tr from-accent/0 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        </motion.div>
-                    ))}
-                </div>
+        <section id="skills" className="py-24 container px-4 md:px-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 border-l border-t border-border/50">
+                {skills.map((group, index) => (
+                    <motion.div
+                        key={group.category}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 }}
+                        className="p-8 border-r border-b border-border/50 bg-background hover:bg-muted/30 transition-colors duration-500 min-h-[200px] flex flex-col gap-4"
+                    >
+                        <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-2">
+                            {group.category}
+                        </h3>
+                        <div className="flex flex-wrap gap-2">
+                            {group.items.map(item => (
+                                <span key={item} className="text-lg md:text-xl font-bold uppercase">
+                                    {item}
+                                </span>
+                            ))}
+                        </div>
+                    </motion.div>
+                ))}
             </div>
         </section>
     );
 }
+

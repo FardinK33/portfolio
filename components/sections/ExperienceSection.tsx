@@ -4,28 +4,28 @@ import { motion } from "motion/react";
 
 const experience = [
     {
-        role: "Senior Engineer",
-        company: "TechCorp Solutions",
-        period: "2023 - Present",
-        description: "Leading the frontend team in re-architecting the core product using Next.js and WebGL. Improved performance by 40% and established a comprehensive design system.",
+        role: "Software Development Intern",
+        company: "Eulogik | Bhopal",
+        period: "2025 - Present", // Adjust year if needed based on 2025-2026
+        description: "Engineered backend services for OHLCV financial market data. Implemented technical indicators for automated trading analysis and built advanced order automation features. Designed a gamified achievement system and improved UI consistency aligned with Figma designs.",
     },
     {
-        role: "Creative Dev",
-        company: "Studio Alpha",
-        period: "2021 - 2023",
-        description: "Collaborated with designers to build award-winning marketing sites. Utilized Three.js and GSAP for high-end animations and interactive storytelling experiences.",
+        role: "Teaching Assistant",
+        company: "Digital Ocean Computer Academy", // Placeholder if not specified
+        period: "2022 - 2023",
+        description: "Mentored 40+ students in programming & computer fundamentals. Simplified complex technical concepts and delivered hands-on coding support.",
     },
-    {
-        role: "Web Developer",
-        company: "Freelance",
-        period: "2019 - 2021",
-        description: "Delivered custom WordPress themes and Shopify stores for over 20 clients. Managed full project lifecycles from concept to deployment.",
-    },
+];
+
+const achievements = [
+    "150+ algorithmic problems solved",
+    "District-level Table Tennis Champion",
+    "Inter-college Volleyball Champion",
 ];
 
 export function ExperienceSection() {
     return (
-        <section className="py-24 container px-4 md:px-6">
+        <section id="experience" className="py-24 container px-4 md:px-6">
             <SectionHeading title="EXPERIENCE," subtitle="Career History" />
 
             <div className="relative border-l border-border/50 ml-4 md:ml-12 space-y-12">
@@ -57,6 +57,25 @@ export function ExperienceSection() {
                         </p>
                     </motion.div>
                 ))}
+            </div>
+
+            <div className="mt-24 ml-4 md:ml-12 pl-8 md:pl-12 border-l border-border/50">
+                <SectionHeading title="ACHIEVEMENTS," subtitle="Recognitions" className="mb-8" />
+                <div className="grid gap-4">
+                    {achievements.map((item, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, x: 20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.1 }}
+                            className="flex items-center gap-4 group"
+                        >
+                            <span className="h-px w-8 bg-muted-foreground group-hover:w-12 transition-all duration-300" />
+                            <p className="text-lg md:text-xl font-medium">{item}</p>
+                        </motion.div>
+                    ))}
+                </div>
             </div>
         </section>
     );
