@@ -18,9 +18,38 @@ export function Navbar() {
     const [isOpen, setIsOpen] = React.useState(false);
     const [mounted, setMounted] = React.useState(false);
     const { theme, setTheme } = useTheme();
+    const [activeSection, setActiveSection] = React.useState<string | null>(null);
+    const [hoveredLink, setHoveredLink] = React.useState<string | null>(null);
 
     React.useEffect(() => {
         setMounted(true);
+
+        const observerOptions = {
+            root: null,
+            rootMargin: "-20% 0px -35% 0px", // Adjusts the active area to be more central
+            threshold: 0.1,
+        };
+
+        const observerCallback = (entries: IntersectionObserverEntry[]) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setActiveSection(`#${entry.target.id}`);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+        navLinks.forEach((link) => {
+            const element = document.querySelector(link.href);
+            if (element) observer.observe(element);
+        });
+
+        // Also observe home/hero section to clear active state if needed, or set to home
+        const homeElement = document.querySelector("#home");
+        if (homeElement) observer.observe(homeElement);
+
+        return () => observer.disconnect();
     }, []);
 
     const toggleMenu = () => setIsOpen(!isOpen);
@@ -62,18 +91,35 @@ export function Navbar() {
                     </a>
 
                     {/* Desktop Menu */}
-                    <div className="hidden md:flex items-center gap-8 border-l pl-4 border-border h-full">
-                        {navLinks.map((link) => (
-                            <a
-                                key={link.name}
-                                href={link.href}
-                                onClick={(e) => handleLinkClick(e, link.href)}
-                                className="text-sm font-medium uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors relative group"
-                            >
-                                {link.name}
-                                <span className="absolute -bottom-1 left-0 w-0 h-px bg-foreground transition-all duration-300 group-hover:w-full" />
-                            </a>
-                        ))}
+                    <div className="hidden md:flex items-center gap-8 h-full" onMouseLeave={() => setHoveredLink(null)}>
+                        <div className="h-full w-px border border-border mr-2"></div>
+
+
+                        {navLinks.map((link) => {
+                            const isSelected = hoveredLink ? hoveredLink === link.href : activeSection === link.href;
+
+                            return (
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    onClick={(e) => handleLinkClick(e, link.href)}
+                                    onMouseEnter={() => setHoveredLink(link.href)}
+                                    className={cn(
+                                        "text-sm font-medium uppercase tracking-widest transition-colors relative group py-2",
+                                        isSelected ? "text-foreground" : "text-muted-foreground"
+                                    )}
+                                >
+                                    {link.name}
+                                    {isSelected && (
+                                        <motion.span
+                                            layoutId="navbar-underline"
+                                            className="absolute bottom-0 left-0 w-full h-px bg-foreground"
+                                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                        />
+                                    )}
+                                </a>
+                            );
+                        })}
 
                         <div className="h-full w-px border border-border"></div>
 
