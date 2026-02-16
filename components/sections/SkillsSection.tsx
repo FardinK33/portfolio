@@ -4,7 +4,7 @@ const skills = [
     { category: "Frontend", items: ["React", "JavaScript", "Zustand", "TailwindCSS"] },
     { category: "Backend", items: ["Node.js", "Express.js", "FastAPI"] },
     { category: "Languages", items: ["Python", "C++", "Java", "SQL"] },
-    { category: "Database", items: ["MongoDB", "Relational Systems"] },
+    { category: "Database", items: ["MongoDB", "PostgreSQL"] },
 ];
 
 export function SkillsSection() {
@@ -33,7 +33,7 @@ export function SkillsSection() {
                                 <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-2">
                                     {group.category}
                                 </h3>
-                                <div className="flex flex-wrap gap-2">
+                                <div className="flex flex-col gap-2">
                                     {group.items.map(item => (
                                         <span key={item} className="text-lg md:text-xl font-bold uppercase">
                                             {item}

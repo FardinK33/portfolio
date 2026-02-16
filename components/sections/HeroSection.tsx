@@ -23,13 +23,13 @@ export function HeroSection() {
                 <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
                     <motion.div
                         style={{ y: yBackground }}
-                        className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full z-0"
+                        className="absolute top-[15%] md:top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full z-0"
                     >
                         <motion.h1
                             initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 0.05, scale: 1 }}
+                            animate={{ opacity: 0.07, scale: 1 }}
                             transition={{ duration: 1.5, ease: "easeOut" }}
-                            className="text-[15vw] md:text-[18vw] font-bold text-center leading-none tracking-tighter text-foreground whitespace-nowrap"
+                            className="text-[14vw] md:text-[18vw] font-bold text-center leading-none tracking-tighter text-foreground whitespace-nowrap"
                         >
                             Developer
                         </motion.h1>
@@ -39,7 +39,7 @@ export function HeroSection() {
                 <div className="container px-4 md:px-6 relative z-10 flex flex-col h-[85%] justify-end mx-auto">
 
                     {/* Foreground Content */}
-                    <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-end pb-12">
+                    <div className="relative z-10 w-full max-w-8xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-end pb-12">
                         <motion.div
                             initial={{ opacity: 0, y: 50 }}
                             animate={{ opacity: 1, y: 0 }}

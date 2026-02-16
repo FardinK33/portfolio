@@ -40,7 +40,7 @@ export function WorksSection() {
             {/* Content Strip - Continuous Vertical Rails */}
             <div className="w-full">
                 <div className="w-[90%] mx-auto border-x border-border pb-24 px-4 md:px-6 pt-12">
-                    <div className="flex flex-col gap-24 md:gap-32">
+                    <div className="flex flex-col">
                         {projects.map((project, index) => (
                             <div key={index}>
                                 <ProjectCard
@@ -48,7 +48,9 @@ export function WorksSection() {
                                     index={index}
                                     {...project}
                                 />
-                                {index !== projects.length - 1 && <div className="border-b border-border"></div>}
+                                {index !== projects.length - 1 && (
+                                    <div className="w-full h-px bg-border my-12 md:my-20" />
+                                )}
                             </div>
                         ))}
                     </div>

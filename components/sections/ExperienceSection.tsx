@@ -6,13 +6,13 @@ const experience = [
     {
         role: "Software Development Intern",
         company: "Eulogik | Bhopal",
-        period: "2025 - Present", // Adjust year if needed based on 2025-2026
+        period: "10/2025 - 01/2026", // Adjust year if needed based on 2025-2026
         description: "Engineered backend services for OHLCV financial market data. Implemented technical indicators for automated trading analysis and built advanced order automation features. Designed a gamified achievement system and improved UI consistency aligned with Figma designs.",
     },
     {
         role: "Teaching Assistant",
         company: "Digital Ocean Computer Academy", // Placeholder if not specified
-        period: "2022 - 2023",
+        period: "11/2022 - 02/2023",
         description: "Mentored 40+ students in programming & computer fundamentals. Simplified complex technical concepts and delivered hands-on coding support.",
     },
 ];

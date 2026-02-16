@@ -36,12 +36,14 @@ export function ProjectCard({
             className={cn("group relative", className)}
         >
             <div className={cn(
-                "grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center",
-                !isEven ? "md:direction-rtl" : ""
+                "grid grid-cols-1 gap-8 md:gap-16 items-center",
+                // Even (Image Left): Image (0.8fr) | Content (1.2fr)
+                // Odd (Image Right): Content (1.2fr) | Image (0.8fr)
+                isEven ? "md:grid-cols-[0.8fr_1.2fr]" : "md:grid-cols-[1.2fr_0.8fr]"
             )}>
                 {/* Image Section */}
                 <div className={cn(
-                    "relative overflow-hidden rounded-xl bg-muted aspect-[16/10] group/image cursor-pointer shadow-lg transition-all duration-500 hover:shadow-2xl",
+                    "relative overflow-hidden rounded-xl bg-muted aspect-[16/10] group/image cursor-pointer shadow-lg transition-all duration-500 hover:shadow-xl",
                     !isEven ? "md:order-2" : "md:order-1"
                 )}>
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/image:opacity-100 transition-opacity duration-500 z-20 flex items-center justify-center p-6 text-center backdrop-blur-[2px]">

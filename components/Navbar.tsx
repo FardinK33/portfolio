@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
+import { flushSync } from "react-dom";
 
 const navLinks = [
     { name: "Works", href: "#works" },
@@ -63,8 +64,62 @@ export function Navbar() {
         }
     };
 
-    const toggleTheme = () => {
-        setTheme(theme === "dark" ? "light" : "dark");
+    const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
+        // @ts-ignore
+        if (!document.startViewTransition) {
+            setTheme(theme === "dark" ? "light" : "dark");
+            return;
+        }
+
+        const x = e.clientX;
+        const y = e.clientY;
+        const endRadius = Math.hypot(
+            Math.max(x, innerWidth - x),
+            Math.max(y, innerHeight - y)
+        );
+
+        const isDark = theme === "dark";
+
+        // @ts-ignore
+        const transition = document.startViewTransition(() => {
+            flushSync(() => {
+                setTheme(isDark ? "light" : "dark");
+            });
+        });
+
+        transition.ready.then(() => {
+            if (isDark) {
+                // Dark → Light: OLD (dark) is on top and SHRINKS to reveal NEW (light)
+                document.documentElement.animate(
+                    { clipPath: [`circle(${endRadius}px at ${x}px ${y}px)`, `circle(0px at ${x}px ${y}px)`] },
+                    { duration: 700, easing: "ease-in-out", pseudoElement: "::view-transition-old(root)", fill: "forwards" }
+                );
+                // Keep old on top, new below
+                document.documentElement.animate(
+                    { zIndex: [2147483646, 2147483646] },
+                    { duration: 700, pseudoElement: "::view-transition-old(root)", fill: "both" }
+                );
+                document.documentElement.animate(
+                    { zIndex: [1, 1] },
+                    { duration: 700, pseudoElement: "::view-transition-new(root)", fill: "both" }
+                );
+            } else {
+                // Light → Dark: NEW (dark) is on top and EXPANDS over OLD (light)
+                document.documentElement.animate(
+                    { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`] },
+                    { duration: 700, easing: "ease-in-out", pseudoElement: "::view-transition-new(root)" }
+                );
+                // Keep new on top, old below
+                document.documentElement.animate(
+                    { zIndex: [2147483646, 2147483646] },
+                    { duration: 700, pseudoElement: "::view-transition-new(root)", fill: "both" }
+                );
+                document.documentElement.animate(
+                    { zIndex: [1, 1] },
+                    { duration: 700, pseudoElement: "::view-transition-old(root)", fill: "both" }
+                );
+            }
+        });
     };
 
     return (
@@ -126,7 +181,7 @@ export function Navbar() {
                         {/* Theme Toggle (Desktop) */}
                         {mounted && (
                             <button
-                                onClick={toggleTheme}
+                                onClick={(e) => toggleTheme(e)}
                                 className={`p-2 rounded-full hover:bg-muted transition-all text-foreground ${theme === "dark" ? "border-r border-t" : "border-l border-b"}`}
                                 aria-label="Toggle theme"
                             >
@@ -140,7 +195,7 @@ export function Navbar() {
                         {/* Theme Toggle (Mobile) */}
                         {mounted && (
                             <button
-                                onClick={toggleTheme}
+                                onClick={(e) => toggleTheme(e)}
                                 className="p-2 rounded-full hover:bg-muted transition-colors text-foreground"
                                 aria-label="Toggle theme"
                             >

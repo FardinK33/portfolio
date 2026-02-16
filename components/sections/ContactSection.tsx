@@ -37,9 +37,9 @@ export function ContactSection() {
                         </a>
 
                         <div className="flex gap-6 text-sm uppercase font-bold tracking-widest text-muted-foreground">
-                            <a href="#" className="hover:text-foreground transition-colors">Github</a>
-                            <a href="#" className="hover:text-foreground transition-colors">LinkedIn</a>
-                            <a href="#" className="hover:text-foreground transition-colors">Twitter</a>
+                            <a href="https://github.com/fardink33" className="hover:text-foreground transition-colors" target="_blank">Github</a>
+                            <a href="https://www.linkedin.com/in/fardink33" className="hover:text-foreground transition-colors" target="_blank">LinkedIn</a>
+                            <a href="https://www.instagram.com/fardin_k31" className="hover:text-foreground transition-colors" target="_blank">Instagram</a>
                         </div>
                     </div>
                 </div>
