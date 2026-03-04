@@ -140,9 +140,13 @@ export function Navbar() {
                     <a
                         href="#"
                         onClick={(e) => handleLinkClick(e, "#home")}
-                        className="text-lg md:text-xl font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors"
+                        className="hover:opacity-75 transition-opacity"
                     >
-                        Fardin Khan
+                        <img
+                            src="/sign.png"
+                            alt="Fardin Khan"
+                            className="h-10 md:h-12 w-auto in-[.dark]:invert"
+                        />
                     </a>
 
                     {/* Desktop Menu */}
