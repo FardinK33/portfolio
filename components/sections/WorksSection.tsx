@@ -7,10 +7,11 @@ const projects = [
     {
         title: "MockAI",
         category: "AI Interview Simulation Engine",
-        image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop", // Placeholder
+        image: "/mock-ai.png",
         tags: ["React", "Zustand", "Node.js", "Express", "MongoDB", "Gemini API"],
         description: "An intelligent mock interview platform that evaluates performance using voice interaction and AI-generated feedback.",
-        hoverText: "Simulating interviews with AI-driven intelligence.",
+        hoverText: "Visit MockAI →",
+        link: "https://mock-ai-pro.vercel.app/",
     },
     {
         title: "Talkia",

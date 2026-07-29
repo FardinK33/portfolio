@@ -11,6 +11,7 @@ interface ProjectCardProps {
     tags: string[];
     description?: string;
     hoverText?: string;
+    link?: string;
     className?: string;
     index?: number;
 }
@@ -22,6 +23,7 @@ export function ProjectCard({
     tags,
     description,
     hoverText,
+    link,
     className,
     index = 0,
 }: ProjectCardProps) {
@@ -42,13 +44,19 @@ export function ProjectCard({
                 isEven ? "md:grid-cols-[0.8fr_1.2fr]" : "md:grid-cols-[1.2fr_0.8fr]"
             )}>
                 {/* Image Section */}
-                <div className={cn(
-                    "relative overflow-hidden rounded-xl bg-muted aspect-[16/10] group/image cursor-pointer shadow-lg transition-all duration-500 hover:shadow-xl",
-                    !isEven ? "md:order-2" : "md:order-1"
-                )}>
+                <a
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                        "relative overflow-hidden rounded-xl bg-muted aspect-[16/10] group/image shadow-lg transition-all duration-500 hover:shadow-xl block",
+                        !link && "pointer-events-none",
+                        !isEven ? "md:order-2" : "md:order-1"
+                    )}
+                >
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/image:opacity-100 transition-opacity duration-500 z-20 flex items-center justify-center p-6 text-center backdrop-blur-[2px]">
                         <p className="text-white font-bold text-lg md:text-2xl tracking-wide transform translate-y-4 group-hover/image:translate-y-0 transition-transform duration-500">
-                            {hoverText || "View Project"}
+                            {hoverText || "View Project →"}
                         </p>
                     </div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60 z-10" />
@@ -58,7 +66,7 @@ export function ProjectCard({
                         fill
                         className="object-cover transition-transform duration-700 ease-out group-hover/image:scale-105"
                     />
-                </div>
+                </a>
 
                 {/* Content Section */}
                 <div className={cn(
