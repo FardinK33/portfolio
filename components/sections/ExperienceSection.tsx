@@ -27,7 +27,7 @@ export function ExperienceSection() {
     return (
         <section id="experience">
             {/* Heading Strip - Full Width Border-Y */}
-            <div className="w-full border-y border-border bg-background/50 backdrop-blur-sm">
+            <div className="w-full border-y border-border bg-background">
                 <div className="w-[90%] mx-auto border-x border-border py-12 px-4 md:px-6">
                     <SectionHeading title="EXPERIENCE," subtitle="Career History" className="mb-0" />
                 </div>
@@ -40,7 +40,7 @@ export function ExperienceSection() {
                         {experience.map((job, index) => (
                             <motion.div
                                 key={index}
-                                initial={{ opacity: 0, x: -20 }}
+                                initial={{ opacity: 0, x: -16 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.2 }}
@@ -73,7 +73,7 @@ export function ExperienceSection() {
                             {achievements.map((item, index) => (
                                 <motion.div
                                     key={index}
-                                    initial={{ opacity: 0, x: 20 }}
+                                    initial={{ opacity: 0, x: 12 }}
                                     whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.1 }}

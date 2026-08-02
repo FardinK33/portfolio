@@ -27,7 +27,7 @@ export function WorksSection() {
     return (
         <section id="works">
             {/* Heading Strip - Full Width Border-Y, Inner 90% Border-X */}
-            <div className="w-full border-y border-border bg-background/50 backdrop-blur-sm">
+            <div className="w-full border-y border-border bg-background">
                 <div className="w-[90%] mx-auto border-x border-border py-12 px-4 md:px-6">
                     <SectionHeading
                         title="Works,"
@@ -47,6 +47,7 @@ export function WorksSection() {
                                 <ProjectCard
                                     key={project.title}
                                     index={index}
+                                    priority={index === 0}
                                     {...project}
                                 />
                                 {index !== projects.length - 1 && (

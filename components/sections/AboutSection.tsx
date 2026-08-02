@@ -5,7 +5,7 @@ export function AboutSection() {
     return (
         <section id="about">
             {/* Heading Strip - Full Width Border-Y */}
-            <div className="w-full border-y border-border bg-background/50 backdrop-blur-sm">
+            <div className="w-full border-y border-border bg-background">
                 <div className="w-[90%] mx-auto border-x border-border py-12 px-4 md:px-6">
                     <h2 className="text-6xl md:text-8xl font-bold uppercase leading-none">
                         ABOUT, <br />
@@ -20,14 +20,13 @@ export function AboutSection() {
                     <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr]">
                         {/* Left: Decorative */}
                         <div className="border-b md:border-b-0 md:border-r border-border pr-8 pb-12 md:pb-0">
-                            <motion.div
-                                initial={{ rotate: 0 }}
-                                animate={{ rotate: 360 }}
-                                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                            {/* CSS spin — runs on compositor thread, zero JS cost */}
+                            <div
                                 className="w-24 h-24 border-2 border-dashed border-muted-foreground rounded-full flex items-center justify-center"
+                                style={{ animation: "spin 10s linear infinite" }}
                             >
                                 <div className="w-2 h-2 bg-foreground rounded-full" />
-                            </motion.div>
+                            </div>
                         </div>
 
                         {/* Right: Content */}

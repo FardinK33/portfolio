@@ -1,39 +1,23 @@
-import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
-import { cn } from "@/lib/utils";
+import { motion } from "motion/react";
 
 export function HeroSection() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end start"]
-    });
-
-    const yBackground = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-
     return (
         <section
             id="home"
-            ref={containerRef}
             className="relative h-screen flex flex-col justify-end pt-20 pb-20"
         >
             <div className="w-[90%] px-4 md:px-6 mx-auto border-x border-border relative h-full flex flex-col justify-end">
 
-                {/* Background Layer (Parallax Text) - Contained */}
+                {/* Background Layer (Static watermark — no parallax JS) */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
-                    <motion.div
-                        style={{ y: yBackground }}
-                        className="absolute top-[15%] md:top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full z-0"
+                    <motion.h1
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 0.06, scale: 1 }}
+                        transition={{ duration: 1.2, ease: "easeOut" }}
+                        className="absolute top-[15%] md:top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-[14vw] md:text-[18vw] font-bold text-center leading-none tracking-tighter text-foreground whitespace-nowrap w-full z-0"
                     >
-                        <motion.h1
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 0.07, scale: 1 }}
-                            transition={{ duration: 1.5, ease: "easeOut" }}
-                            className="text-[14vw] md:text-[18vw] font-bold text-center leading-none tracking-tighter text-foreground whitespace-nowrap"
-                        >
-                            Developer
-                        </motion.h1>
-                    </motion.div>
+                        Developer
+                    </motion.h1>
                 </div>
 
                 <div className="container px-4 md:px-6 relative z-10 flex flex-col h-[85%] justify-end mx-auto">
@@ -41,9 +25,9 @@ export function HeroSection() {
                     {/* Foreground Content */}
                     <div className="relative z-10 w-full max-w-8xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-end pb-12">
                         <motion.div
-                            initial={{ opacity: 0, y: 50 }}
+                            initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8 }}
+                            transition={{ duration: 0.7, ease: "easeOut" }}
                         >
                             <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter uppercase leading-[0.9]">
                                 Fardin <br />
@@ -54,7 +38,7 @@ export function HeroSection() {
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            transition={{ delay: 0.5, duration: 0.8 }}
+                            transition={{ delay: 0.4, duration: 0.7 }}
                             className="flex flex-col gap-6"
                         >
                             <div className="max-w-md ml-auto">
@@ -77,25 +61,17 @@ export function HeroSection() {
                 </div>
             </div>
 
-            {/* Bottom Role Strip */}
+            {/* Bottom Role Strip — pure CSS marquee, no JS loop */}
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 1, duration: 1 }}
-                className="absolute bottom-4 left-0 w-full border-y border-border py-3 bg-background/50 backdrop-blur-sm overflow-hidden"
+                transition={{ delay: 0.9, duration: 0.8 }}
+                className="absolute bottom-4 left-0 w-full border-y border-border py-3 bg-background/50 overflow-hidden"
             >
-                <div className="px-4 flex items-center text-xs md:text-sm font-bold uppercase tracking-widest text-muted-foreground/80 h-full overflow-hidden mask-linear-gradient">
+                <div className="flex items-center text-xs md:text-sm font-bold uppercase tracking-widest text-muted-foreground/80 h-full overflow-hidden hero-marquee-mask">
                     <div className="flex w-full overflow-hidden">
-                        <motion.div
-                            className="flex whitespace-nowrap"
-                            animate={{ x: "-50%" }}
-                            transition={{
-                                repeat: Infinity,
-                                ease: "linear",
-                                duration: 20
-                            }}
-                        >
-                            {/* Track 1 */}
+                        {/* CSS-driven marquee — no JS, runs on compositor thread */}
+                        <div className="flex whitespace-nowrap hero-marquee-track">
                             <div className="flex gap-12 items-center px-6">
                                 <span>REAL-TIME SYSTEMS</span>
                                 <span>AI INTEGRATION</span>
@@ -108,8 +84,7 @@ export function HeroSection() {
                                 <span>IMMERSIVE UI</span>
                                 <span>PERFORMANCE FIRST</span>
                             </div>
-                            {/* Track 2 (Duplicate for smooth loop) */}
-                            <div className="flex gap-12 items-center px-6">
+                            <div className="flex gap-12 items-center px-6" aria-hidden="true">
                                 <span>REAL-TIME SYSTEMS</span>
                                 <span>AI INTEGRATION</span>
                                 <span>FINTECH LOGIC</span>
@@ -121,7 +96,7 @@ export function HeroSection() {
                                 <span>IMMERSIVE UI</span>
                                 <span>PERFORMANCE FIRST</span>
                             </div>
-                        </motion.div>
+                        </div>
                     </div>
                 </div>
             </motion.div>

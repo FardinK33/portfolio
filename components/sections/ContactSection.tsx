@@ -6,16 +6,16 @@ export function ContactSection() {
     return (
         <section id="contact" className="relative overflow-hidden">
             {/* Heading Strip - Full Width Border-Y */}
-            <div className="w-full border-y border-border bg-background/50 backdrop-blur-sm">
+            <div className="w-full border-y border-border bg-background">
                 <div className="w-[90%] mx-auto border-x border-border py-12 px-4 md:px-6">
                     <h4 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-4">
                         Have an idea? Building something ambitious?
                     </h4>
                     <motion.h2
-                        initial={{ y: 100, opacity: 0 }}
+                        initial={{ y: 30, opacity: 0 }}
                         whileInView={{ y: 0, opacity: 1 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
                         className="text-6xl md:text-8xl font-bold uppercase leading-none tracking-tighter"
                     >
                         LET'S <br />

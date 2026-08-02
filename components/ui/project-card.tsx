@@ -14,6 +14,7 @@ interface ProjectCardProps {
     link?: string;
     className?: string;
     index?: number;
+    priority?: boolean;
 }
 
 export function ProjectCard({
@@ -26,21 +27,20 @@ export function ProjectCard({
     link,
     className,
     index = 0,
+    priority = false,
 }: ProjectCardProps) {
     const isEven = index % 2 === 0;
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             className={cn("group relative", className)}
         >
             <div className={cn(
                 "grid grid-cols-1 gap-8 md:gap-16 items-center",
-                // Even (Image Left): Image (0.8fr) | Content (1.2fr)
-                // Odd (Image Right): Content (1.2fr) | Image (0.8fr)
                 isEven ? "md:grid-cols-[0.8fr_1.2fr]" : "md:grid-cols-[1.2fr_0.8fr]"
             )}>
                 {/* Image Section */}
@@ -49,13 +49,14 @@ export function ProjectCard({
                     target="_blank"
                     rel="noopener noreferrer"
                     className={cn(
-                        "relative overflow-hidden rounded-xl bg-muted aspect-[16/10] group/image shadow-lg transition-all duration-500 hover:shadow-xl block",
+                        "relative overflow-hidden rounded-xl bg-muted aspect-[16/10] group/image shadow-lg transition-shadow duration-300 hover:shadow-xl block",
                         !link && "pointer-events-none",
                         !isEven ? "md:order-2" : "md:order-1"
                     )}
                 >
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/image:opacity-100 transition-opacity duration-500 z-20 flex items-center justify-center p-6 text-center backdrop-blur-[2px]">
-                        <p className="text-white font-bold text-lg md:text-2xl tracking-wide transform translate-y-4 group-hover/image:translate-y-0 transition-transform duration-500">
+                    {/* Hover overlay — NO backdrop-blur (was causing cursor lag) */}
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 z-20 flex items-center justify-center p-6 text-center">
+                        <p className="text-white font-bold text-lg md:text-2xl tracking-wide transform translate-y-3 group-hover/image:translate-y-0 transition-transform duration-300">
                             {hoverText || "View Project →"}
                         </p>
                     </div>
@@ -64,7 +65,10 @@ export function ProjectCard({
                         src={image}
                         alt={title}
                         fill
-                        className="object-cover transition-transform duration-700 ease-out group-hover/image:scale-105"
+                        priority={priority}
+                        sizes="(max-width: 768px) 100vw, 45vw"
+                        className="object-cover transition-transform duration-300 ease-out group-hover/image:scale-105"
+                        style={{ willChange: "transform" }}
                     />
                 </a>
 
@@ -93,7 +97,7 @@ export function ProjectCard({
                         !isEven ? "justify-end" : "justify-start"
                     )}>
                         {tags.map((tag) => (
-                            <Badge key={tag} variant="outline" className="rounded-full px-4 py-1 uppercase text-[10px] tracking-wider border-border bg-background/50 backdrop-blur-sm">
+                            <Badge key={tag} variant="outline" className="rounded-full px-4 py-1 uppercase text-[10px] tracking-wider border-border bg-background/50">
                                 {tag}
                             </Badge>
                         ))}
